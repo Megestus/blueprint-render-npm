@@ -1,4 +1,4 @@
-// blueprint-render v0.1.3 — 自包含 UE 蓝图 / 材质图查看器
+// blueprint-render v0.1.5 — 自包含 UE 蓝图 / 材质图查看器
 // 构成：BlueprintUE render.js（MIT，含增强修改）+ render.css + <blueprint-viewer> Web Component
 // 重新生成：npm run build（scripts/build.mjs）
 
@@ -92,8 +92,8 @@ if (!document.getElementById(BUE_STYLE_ID)) {
     __BUE_RENDER_CSS__ +
     "\n" +
     [
-      ".blueprint-render{position:relative;margin:1rem 0}",
-      ".blueprint-render__container{width:100%;overflow:hidden;border-radius:8px;background:#a6a6a6;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.08);transform:translateZ(0)}",
+      ".blueprint-render{position:relative;margin:1rem 0;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.08)}",
+      ".blueprint-render__container{width:100%;overflow:hidden;border-radius:8px;background:#a6a6a6}",
       ".blueprint-render__error{position:absolute;top:0;left:0;right:0;z-index:6;padding:8px 12px;font-size:13px;color:#fff;background:rgba(220,38,38,.92);border-radius:8px 8px 0 0}",
       ".frame-header__name-label{color:#fff;font-size:18px;padding:0 10px;pointer-events:none;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40%}",
     ].join("\n");
