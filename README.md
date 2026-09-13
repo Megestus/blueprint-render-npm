@@ -7,7 +7,7 @@
 
 - **core**：`<blueprint-viewer>` 自定义元素（light DOM），内置蓝图文本加载、渲染、
   「copy code」按钮、自动全图适配（All）、左下角操作提示、右下角水印。
-- **渲染器**：基于 [BlueprintUE](https://github.com/blueprintue/blueprintue-render) 官方
+- **渲染器**：基于 [BlueprintUE](https://github.com/blueprintue/blueprintue-self-hosted-edition) 官方
   render.js（MIT）的增强版，改动：左键拖动画布（原右键，避免浏览器手势冲突）、
   All 全图显示按钮、英文操作提示、水印缩小、默认 auto-fit 支持。
 - **适配层**：`src/vuepress/BlueprintRender.vue`（VuePress 2）、`src/astro/BlueprintViewer.astro`。
