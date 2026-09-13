@@ -1,6 +1,6 @@
 {
   "name": "blueprint-render",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "框架无关的 UE 蓝图 / 材质图查看器：<blueprint-viewer> Web Component + BlueprintUE 增强渲染器，VuePress / Astro / 原生 HTML 通用",
   "type": "module",
   "main": "./dist/blueprint-viewer.js",
