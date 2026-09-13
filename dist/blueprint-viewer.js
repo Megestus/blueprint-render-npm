@@ -1,4 +1,4 @@
-// blueprint-render v0.1.5 — 自包含 UE 蓝图 / 材质图查看器
+// blueprint-render v0.1.6 — 自包含 UE 蓝图 / 材质图查看器
 // 构成：BlueprintUE render.js（MIT，含增强修改）+ render.css + <blueprint-viewer> Web Component
 // 重新生成：npm run build（scripts/build.mjs）
 
@@ -71,7 +71,7 @@ const __BUE_RENDER_CSS__ = ".bue-render{-webkit-touch-callout:none;border:0;colo
  *   text      直接传入蓝图文本（与 src 二选一，src 优先）
  *   height    容器高度 px（默认 643）
  *   show-copy 是否显示「copy code」按钮（默认 true）
- *   auto-fit  渲染完成后自动全图适配（默认 true）
+ *   auto-fit  渲染完成后自动全图适配（默认 false，需 auto-fit="true" 开启；自动适配可能与初始缩放冲突导致卡顿）
  *   name      显示在 copy code 左侧的名称标签；不传则自动从 src 文件名提取
  *   title     无障碍 / 提示标题
  */
@@ -94,7 +94,7 @@ if (!document.getElementById(BUE_STYLE_ID)) {
     [
       "blueprint-viewer{display:block}",
       ".blueprint-render{position:relative;margin:1rem 0}",
-      ".blueprint-render__container{width:100%;overflow:hidden;border-radius:8px;background:#a6a6a6;border:1px solid rgba(0,0,0,.15)}",
+      ".blueprint-render__container{width:100%;overflow:hidden;background:#a6a6a6}",
       ".blueprint-render__error{position:absolute;top:0;left:0;right:0;z-index:6;padding:8px 12px;font-size:13px;color:#fff;background:rgba(220,38,38,.92);border-radius:8px 8px 0 0}",
       ".frame-header__name-label{color:#fff;font-size:18px;padding:0 10px;pointer-events:none;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40%}",
     ].join("\n");
@@ -151,6 +151,13 @@ class BlueprintViewer extends HTMLElement {
 
     this.appendChild(this._wrapper);
     this._applyHeight();
+
+    // All 模式状态：点了 All 后拦截缩放，提示用户点 Reset
+    this._allMode = false;
+    this._onHeaderClick = this._onHeaderClick.bind(this);
+    this._onWheelCapture = this._onWheelCapture.bind(this);
+    this._container.addEventListener("click", this._onHeaderClick);
+    this._container.addEventListener("wheel", this._onWheelCapture, { capture: true });
   }
 
   _applyHeight() {
@@ -301,13 +308,45 @@ class BlueprintViewer extends HTMLElement {
 
   /** 渲染完成后自动执行一次全图适配（All），让全部节点默认完整显示 */
   _autoFit() {
-    if (!boolAttr(this, "auto-fit", true)) return;
-    // 双 rAF 等布局稳定后再触发（行为与用户点击 All 完全一致）
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        this._container.querySelector(".frame-header__buttons-all")?.click();
-      });
-    });
+    if (!boolAttr(this, "auto-fit", false)) return;
+    // 等浏览器空闲 + 额外延迟，确保渲染器完全就绪后再修改 transform，
+    // 避免在初始化期间过早设置 transform 导致 GPU 合成层异常、后续缩放卡顿
+    const doFit = () => this._container.querySelector(".frame-header__buttons-all")?.click();
+    if (window.requestIdleCallback) {
+      requestIdleCallback(() => setTimeout(doFit, 150), { timeout: 1500 });
+    } else {
+      setTimeout(doFit, 400);
+    }
+  }
+
+  /** 监听 All / Reset 按钮，维护 All 模式状态 */
+  _onHeaderClick(e) {
+    if (e.target.classList?.contains("frame-header__buttons-all")) {
+      this._allMode = true;
+    }
+    if (e.target.classList?.contains("frame-header__buttons-reset")) {
+      this._allMode = false;
+    }
+  }
+
+  /** 捕获阶段拦截滚轮：All 模式下禁止缩放，显示提示引导用户点 Reset */
+  _onWheelCapture(e) {
+    if (!this._allMode) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    this._showOverlayHint("Click Reset to enable zoom");
+  }
+
+  /** 复用渲染器内置 .overlay 浮层显示提示（与 "Use ctrl + scroll to zoom" 同款样式） */
+  _showOverlayHint(text) {
+    const overlay = this._container?.querySelector(".overlay");
+    if (!overlay) return;
+    overlay.style.display = "flex";
+    overlay.textContent = text;
+    clearTimeout(this._hintTimer);
+    this._hintTimer = setTimeout(() => {
+      overlay.style.display = "none";
+    }, 1500);
   }
 }
 
