@@ -3,6 +3,12 @@
 面向 UE 美术 / 技术美术同学，初衷是让大家在写学习笔记时能直接嵌入**可交互、可缩放、可复制节点代码**的蓝图 / 材质图——解决截图分辨率低、还原麻烦的问题。
 框架无关的 `<blueprint-viewer>` Web Component + BlueprintUE 增强渲染器，一套核心适配 VuePress / Astro / 原生 HTML 等任意构建器。
 
+## 效果预览
+
+![材质图渲染效果](docs/images/material-graph-preview.png)
+
+顶部工具栏：平移缩放、All 全图适配、copy code 一键复制蓝图文本、名称标签（自动从文件名提取或手动指定）。
+
 ## 这是什么
 
 - **core**：`<blueprint-viewer>` 自定义元素（light DOM），内置蓝图文本加载、渲染、
