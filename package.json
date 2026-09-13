@@ -1,0 +1,45 @@
+{
+  "name": "blueprint-render",
+  "version": "0.1.0",
+  "description": "框架无关的 UE 蓝图 / 材质图查看器：<blueprint-viewer> Web Component + BlueprintUE 增强渲染器，VuePress / Astro / 原生 HTML 通用",
+  "type": "module",
+  "main": "./dist/blueprint-viewer.js",
+  "module": "./dist/blueprint-viewer.js",
+  "exports": {
+    ".": "./dist/blueprint-viewer.js",
+    "./blueprint-viewer.js": "./dist/blueprint-viewer.js",
+    "./vuepress": "./src/vuepress/BlueprintRender.vue",
+    "./astro": "./src/astro/BlueprintViewer.astro",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src/core",
+    "src/vuepress",
+    "src/astro",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "unreal-engine",
+    "blueprint",
+    "material",
+    "web-component",
+    "vuepress",
+    "astro"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://192.168.31.76:3000/Megestus/blueprint-render.git"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,56 @@
+---
+/**
+ * BlueprintViewer — Astro 适配层
+ *
+ * 用法：
+ *   1. 安装核心：npm install blueprint-render
+ *   2. 蓝图 .txt 文件放进 public/blueprints/（构建时自动发布到站点根）
+ *   3. 页面里使用：
+ *        import BlueprintViewer from "blueprint-render/astro";
+ *        <BlueprintViewer src="/blueprints/xxx.txt" />
+ *
+ * 详细说明见 docs/astro.md
+ */
+interface Props {
+  /** 蓝图文本文件 URL（public 目录下，以 / 开头） */
+  src?: string;
+  /** 直接传入蓝图文本（与 src 二选一，src 优先） */
+  text?: string;
+  /** 渲染区域高度（px），默认 643 */
+  height?: number;
+  /** 是否显示「copy code」按钮，默认 true */
+  showCopy?: boolean;
+  /** 渲染完成后是否自动全图适配（All），默认 true */
+  autoFit?: boolean;
+  /** 无障碍/提示用标题 */
+  title?: string;
+}
+
+const {
+  src,
+  text,
+  height = 643,
+  showCopy = true,
+  autoFit = true,
+  title = "Blueprint",
+} = Astro.props;
+
+// 布尔值显式转成字符串属性，避免 Astro 裸属性与缺省语义混淆
+const showCopyAttr = showCopy === false ? "false" : "true";
+const autoFitAttr = autoFit === false ? "false" : "true";
+---
+
+<blueprint-viewer
+  set:html={undefined}
+  {src}
+  {text}
+  height={height}
+  show-copy={showCopyAttr}
+  auto-fit={autoFitAttr}
+  title={title}
+></blueprint-viewer>
+
+<script>
+  // 客户端按需加载核心（npm 包自引用：通过 package.json exports 解析到 dist）
+  import "blueprint-render";
+</script>
