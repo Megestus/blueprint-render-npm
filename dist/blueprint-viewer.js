@@ -72,6 +72,7 @@ const __BUE_RENDER_CSS__ = ".bue-render{-webkit-touch-callout:none;border:0;colo
  *   height    容器高度 px（默认 643）
  *   show-copy 是否显示「copy code」按钮（默认 true）
  *   auto-fit  渲染完成后自动全图适配（默认 true）
+ *   name      显示在 copy code 左侧的名称标签；不传则自动从 src 文件名提取
  *   title     无障碍 / 提示标题
  */
 
@@ -94,6 +95,7 @@ if (!document.getElementById(BUE_STYLE_ID)) {
       ".blueprint-render{position:relative;margin:1rem 0}",
       ".blueprint-render__container{width:100%;overflow:hidden;border-radius:8px;background:#a6a6a6;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.08)}",
       ".blueprint-render__error{position:absolute;top:0;left:0;right:0;z-index:6;padding:8px 12px;font-size:13px;color:#fff;background:rgba(220,38,38,.92);border-radius:8px 8px 0 0}",
+      ".frame-header__name-label{color:#fff;font-size:18px;padding:0 10px;pointer-events:none;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40%}",
     ].join("\n");
   document.head.appendChild(style);
 }
@@ -107,7 +109,7 @@ function boolAttr(el, name, fallback) {
 
 class BlueprintViewer extends HTMLElement {
   static get observedAttributes() {
-    return ["src", "text", "height", "show-copy", "auto-fit"];
+    return ["src", "text", "height", "show-copy", "auto-fit", "name"];
   }
 
   connectedCallback() {
@@ -220,11 +222,33 @@ class BlueprintViewer extends HTMLElement {
     }
   }
 
+  /** 解析显示名称：优先 name 属性，否则从 src 文件名提取（去路径去扩展名） */
+  _resolveName() {
+    const explicit = this.getAttribute("name");
+    if (explicit && explicit.trim()) return explicit.trim();
+    const src = this.getAttribute("src");
+    if (!src) return "";
+    const file = src.split("/").pop() || src;
+    return file.replace(/\.[^.]+$/, "");
+  }
+
   /** 把「copy code」按钮放进渲染器顶部菜单栏（Zoom 左侧），风格与渲染器统一 */
   _mountCopyButton() {
     if (!boolAttr(this, "show-copy", true)) return;
     const header = this._container.querySelector(".frame-header");
     if (!header || header.querySelector(".frame-header__buttons-copycode")) return;
+
+    // 名称标签（copy code 左侧）
+    const name = this._resolveName();
+    if (name) {
+      const label = document.createElement("div");
+      label.className = "frame-header__name-label";
+      label.textContent = name;
+      label.title = name;
+      const zoom = header.querySelector(".frame-header__current-zoom");
+      if (zoom) header.insertBefore(label, zoom);
+      else header.appendChild(label);
+    }
 
     const btn = document.createElement("div");
     btn.className = "frame-header__buttons-copycode";
