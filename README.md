@@ -5,7 +5,7 @@
 
 ## 效果预览
 
-![材质图渲染效果](docs/images/material-graph-preview.png)
+![材质图渲染效果](https://megestus-1309556466.cos.ap-shanghai.myqcloud.com/img/20260914025311955.png)
 
 顶部工具栏：平移缩放、All 全图适配、copy code 一键复制蓝图文本、名称标签（自动从文件名提取或手动指定）。
 
