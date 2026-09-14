@@ -1,7 +1,7 @@
 # blueprint-render
 
 面向 UE 美术 / 技术美术同学，初衷是让大家在写学习笔记时能直接嵌入**可交互、可缩放、可复制节点代码**的蓝图 / 材质图——解决截图分辨率低、还原麻烦的问题。
-框架无关的 `<blueprint-viewer>` Web Component + BlueprintUE 增强渲染器，一套核心适配 VuePress / Astro / 原生 HTML 等任意构建器。
+框架无关的 `<blueprint-viewer>` Web Component + BlueprintUE 修改版渲染器，一套核心适配 VuePress / Astro / 原生 HTML 等任意构建器。
 
 ## 效果预览
 
@@ -14,7 +14,7 @@
 - **core**：`<blueprint-viewer>` 自定义元素（light DOM），内置蓝图文本加载、渲染、
   「copy code」按钮、自动全图适配（All）、左下角操作提示、右下角水印。
 - **渲染器**：基于 [BlueprintUE](https://github.com/blueprintue/blueprintue-self-hosted-edition) 官方
-  render.js（MIT）的增强版，改动：左键拖动画布（原右键，避免浏览器手势冲突）、
+  render.js（MIT）的修改版，改动：左键拖动画布（原右键，避免浏览器手势冲突）、
   All 全图显示按钮、英文操作提示、水印缩小、默认 auto-fit 支持。
 - **适配层**：`src/vuepress/BlueprintRender.vue`（VuePress 2）、`src/astro/BlueprintViewer.astro`。
 
@@ -146,7 +146,7 @@ npm run build      # 生成 dist/blueprint-viewer.js（自包含单文件）
 ## 后续计划
 
 - **更多构建器适配层**：Hugo shortcode、VitePress、Hexo、Next.js / Nuxt 等框架的便捷封装组件。核心 `<blueprint-viewer>` 本身已构建器无关，任何支持自定义元素的站点都能直接通过 `<script type="module">` 引入使用。
-- **渲染器增强**：更多 UE 新版本节点样式、大图性能优化、明暗主题适配。
+- **渲染器改进**：更多 UE 新版本节点样式、大图性能优化、明暗主题适配。
 - **工具链**：`.uasset` 文件直接解析集成（待官方 [uasset-reader-js](https://github.com/blueprintue/uasset-reader-js) 完善蓝图节点解析后）。
 
 ## 文档
@@ -174,7 +174,7 @@ npm run build      # 生成 dist/blueprint-viewer.js（自包含单文件）
 - 许可：MIT License
 - 版权：© BlueprintUE Contributors
 
-本项目在其基础上做了以下增强修改（修改声明见 `src/core/render.js` 文件头）：
+本项目在其基础上做了以下修改（修改声明见 `src/core/render.js` 文件头）：
 - 左键拖动画布平移（原为右键）
 - 新增 All 全图适配按钮
 - `getStyleTransformCSS` 改用 `translate3d()` 强制 GPU 合成层
