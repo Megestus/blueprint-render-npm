@@ -187,4 +187,15 @@ npm run build      # 生成 dist/blueprint-viewer.js（自包含单文件）
 
 如果这个项目对你有帮助，可以请我喝杯咖啡 ☕
 
-（支付宝 / 微信收款码待添加）
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">支付宝</td>
+      <td align="center">微信</td>
+    </tr>
+    <tr>
+      <td><img src="docs/alipay-qr.png" width="260" /></td>
+      <td><img src="docs/wechat-qr.png" width="260" /></td>
+    </tr>
+  </table>
+</div>
