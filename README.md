@@ -1,5 +1,8 @@
 # blueprint-render
 
+[![npm version](https://img.shields.io/npm/v/blueprint-render.svg)](https://www.npmjs.com/package/blueprint-render)
+[![license](https://img.shields.io/npm/l/blueprint-render.svg)](LICENSE)
+
 English | [中文](README_zh.md)
 
 A framework-agnostic `<blueprint-viewer>` Web Component + BlueprintUE modified renderer for embedding interactive UE Blueprint / Material graphs into notes and blogs.
