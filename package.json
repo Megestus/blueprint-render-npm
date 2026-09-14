@@ -1,6 +1,6 @@
 {
   "name": "blueprint-render",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "框架无关的 UE 蓝图 / 材质图查看器：<blueprint-viewer> Web Component + BlueprintUE 增强渲染器，VuePress / Astro / 原生 HTML 通用",
   "type": "module",
   "main": "./dist/blueprint-viewer.js",
@@ -37,7 +37,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://192.168.31.76:3000/Megestus/blueprint-render.git"
+    "url": "https://github.com/Megestus/blueprint-render.git"
+  },
+  "homepage": "https://github.com/Megestus/blueprint-render#readme",
+  "bugs": {
+    "url": "https://github.com/Megestus/blueprint-render/issues"
   },
   "engines": {
     "node": ">=18"

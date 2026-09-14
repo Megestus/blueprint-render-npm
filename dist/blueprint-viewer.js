@@ -1,4 +1,4 @@
-// blueprint-render v0.2.1 — 自包含 UE 蓝图 / 材质图查看器
+// blueprint-render v0.2.2 — 自包含 UE 蓝图 / 材质图查看器
 // 构成：BlueprintUE render.js（MIT，含增强修改）+ render.css + <blueprint-viewer> Web Component
 // 重新生成：npm run build（scripts/build.mjs）
 
