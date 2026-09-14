@@ -6,6 +6,8 @@
 
 框架无关的 `<blueprint-viewer>` Web Component + BlueprintUE 修改版渲染器，一套核心适配 VuePress / Astro / 原生 HTML 等任意构建器。
 
+同时提供 Obsidian 插件：[obsidian-blueprint-viewer](https://github.com/Megestus/obsidian-blueprint-viewer)
+
 ## 效果预览
 
 ![材质图渲染效果](https://megestus-1309556466.cos.ap-shanghai.myqcloud.com/img/20260914025311955.png)

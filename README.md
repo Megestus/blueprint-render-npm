@@ -6,6 +6,8 @@ A framework-agnostic `<blueprint-viewer>` Web Component + BlueprintUE modified r
 
 > Motivation: As a TA / environment artist, I got tired of taking low-resolution screenshots of blueprint graphs. Now you can paste blueprint text directly and get an interactive, zoomable, copyable diagram.
 
+Also available as an Obsidian plugin: [obsidian-blueprint-viewer](https://github.com/Megestus/obsidian-blueprint-viewer)
+
 ## Preview
 
 ![Material graph render](https://megestus-1309556466.cos.ap-shanghai.myqcloud.com/img/20260914025311955.png)
