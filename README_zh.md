@@ -1,5 +1,8 @@
 # blueprint-render
 
+[![npm version](https://img.shields.io/npm/v/blueprint-render.svg)](https://www.npmjs.com/package/blueprint-render)
+[![license](https://img.shields.io/npm/l/blueprint-render.svg)](LICENSE)
+
 [English](README.md) | 中文
 
 面向 UE 美术 / 技术美术同学，初衷是让大家在写学习笔记时能直接嵌入**可交互、可缩放、可复制节点代码**的蓝图 / 材质图——解决截图分辨率低、还原麻烦的问题。
