@@ -90,7 +90,7 @@ import "blueprint-render";
 | `height` | number | 643 | 渲染区域高度（px） |
 | `name` | string | 自动从 src 提取 | 显示在 copy code 左侧的名称标签；不传则自动取 src 文件名（去路径、去扩展名） |
 | `show-copy` | boolean | true | 显示「copy code」按钮 |
-| `auto-fit` | boolean | true | 渲染完成后自动全图适配 |
+| `auto-fit` | boolean | false | 渲染完成后自动全图适配（默认关闭，需显式 `auto-fit="true"`） |
 | `title` | string | Blueprint | 无障碍 / 提示标题 |
 
 ## 交互说明
@@ -155,7 +155,36 @@ npm run build      # 生成 dist/blueprint-viewer.js（自包含单文件）
 - [Astro 集成](docs/astro.md)
 - [npm 发布说明](docs/npm-publish.md)
 
-## 许可
+## 许可与署名
 
-MIT。渲染器版权归 BlueprintUE（见 `LICENSE.blueprintUE`），增强修改见
-`src/core/render.js` 文件头声明。
+### 本项目许可
+
+本项目以 **MIT License** 发布，详见 [LICENSE](LICENSE)。
+
+### 第三方组件署名
+
+本项目的渲染器基于 [BlueprintUE Self-Hosted Edition](https://github.com/blueprintue/blueprintue-self-hosted-edition)：
+
+- `src/core/render.js` — Blueprint 渲染引擎
+- `src/core/render.css` — Blueprint 样式表
+
+**原始项目信息：**
+- 项目：BlueprintUE Self-Hosted Edition
+- 仓库：[blueprintue/blueprintue-self-hosted-edition](https://github.com/blueprintue/blueprintue-self-hosted-edition)
+- 许可：MIT License
+- 版权：© BlueprintUE Contributors
+
+本项目在其基础上做了以下增强修改（修改声明见 `src/core/render.js` 文件头）：
+- 左键拖动画布平移（原为右键）
+- 新增 All 全图适配按钮
+- `getStyleTransformCSS` 改用 `translate3d()` 强制 GPU 合成层
+- 英文操作提示、水印缩小
+- Web Component 封装（`<blueprint-viewer>`）
+
+根据 MIT 许可条款，本项目保留了原始版权声明并在此明确署名。
+
+## 支持作者
+
+如果这个项目对你有帮助，可以请我喝杯咖啡 ☕
+
+（支付宝 / 微信收款码待添加）
